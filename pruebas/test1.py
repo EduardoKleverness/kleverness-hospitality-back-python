@@ -20,6 +20,9 @@ isOccupied = False
 
 # Ecobee AUTH
 response = requests.request("POST", urlAuth, json=payload, headers=headers)
+print("inicio respuesta de la peticion")
+print(response.text)
+print("fin respuesta de la peticion")
 
 if response.status_code == 200:
     responseJson = response.json()
