@@ -4,6 +4,7 @@ import os
 urlAuth = "https://api.sb.ecobee.com/token"
 urlSensors = "https://api.sb.ecobee.com/api/v1/thermostats/521755031179/sensors"
 urlSendAllOnOff = "https://d008.kleverness.com/routine/launch/allonoff"
+urlThermostats = "https://api-hospitality.kleverness.com/dev/thermostats"
 
 payload = {
     "audience": "https://api.sb.ecobee.com",
@@ -60,3 +61,15 @@ if response.status_code == 200:
             responseAllOnOff = requests.request("POST", urlSendAllOnOff, json=payloadAllOnOff)
             if responseAllOnOff.status_code == 200:
                 print("All On/Off sended")
+
+print("Empieza get thermostats")
+response = requests.request("GET", urlThermostats)
+responseThermostat = response.json()
+print(response.json())
+print(responseThermostat['payload'])
+
+# obtiene la ocupación
+for occupancy in responseThermostat['payload']:
+    print("thermostat data")
+    print(occupancy['serialNumber'])
+    print(occupancy['occupancy'])
